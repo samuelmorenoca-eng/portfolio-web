@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(try { python --version } catch { \"python not found\" }; Remove-Item \"$env:TEMP\\\\ui-ux-pro-max-skill\" -Recurse -Force -Confirm:$false)",
+      "PowerShell(claude mcp add magic --scope user --env API_KEY=\"14cce96287c2deb31435ce09ab60da9b39e5bba7084e2dcd4e5bf8f3c25a6bda\" -- npx -y \"@21st-dev/magic@latest\")",
+      "PowerShell($c = Get-Command npx -ErrorAction SilentlyContinue; if \\($c\\) { \"npx visible in fresh shell: $\\($c.Source\\)\" } else { \"npx NOT in fresh shell PATH\" })",
+      "PowerShell($out = claude --debug mcp list 2>&1 | Out-String; $out.Substring\\(0, [Math]::Min\\(6000, $out.Length\\)\\))"
+    ]
+  }
+}
