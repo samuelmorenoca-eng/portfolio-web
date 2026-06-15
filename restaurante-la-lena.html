@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#1f120c" />
+<title>La Leña &amp; Sabor — Parrilla y comida típica en Cali</title>
+<meta name="description" content="La Leña & Sabor: carnes a la parrilla y comida típica colombiana en Cali. Sabor a leña, ambiente cálido y tradición familiar. Reserva por WhatsApp." />
+
+<!-- ============================================================
+     Google Fonts — Zilla Slab (slab serif artesanal para títulos)
+     + Inter (sans limpia para el cuerpo)
+============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Zilla+Slab:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   1. TOKENS DE DISEÑO  (variables / sistema de diseño)
+   ============================================================ */
+:root {
+  /* — Paleta tierra — */
+  --ink:        #1f120c;   /* marrón casi negro, texto y fondos hondos */
+  --espresso:   #2c1a10;   /* marrón profundo */
+  --ember:      #d9622b;   /* naranja brasa (acento principal) */
+  --ember-deep: #b8481c;   /* brasa intensa */
+  --gold:       #cda349;   /* dorado / acento (solo sobre fondos oscuros) */
+  --gold-soft:  #e3c87f;   /* dorado claro */
+  --gold-ink:   #8f6a1d;   /* dorado oscuro accesible para texto sobre fondos claros */
+  --cream:      #f8f1e6;   /* crema, fondo claro */
+  --cream-2:    #f1e7d6;   /* crema más cálida */
+  --paper:      #fdfaf4;   /* casi blanco cálido */
+  --line:       rgba(74, 47, 29, 0.14);
+
+  /* — Texto — */
+  --text-strong: #271812;
+  --text:        #3c2a20;
+  --text-soft:   #6c5847;
+  --text-on-dark: #f4e7d6;
+  --text-on-dark-soft: rgba(244, 231, 214, 0.72);
+
+  /* — Tipografía — */
+  --font-display: 'Zilla Slab', Georgia, 'Times New Roman', serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* — Radios — */
+  --radius:    16px;
+  --radius-lg: 24px;
+
+  /* — Sombras cálidas en capas (profundidad premium, no plano) — */
+  --shadow-sm:  0 1px 2px rgba(31, 18, 12, 0.06), 0 3px 10px -2px rgba(31, 18, 12, 0.08);
+  --shadow:     0 4px 12px -4px rgba(31, 18, 12, 0.12), 0 18px 42px -16px rgba(31, 18, 12, 0.30);
+  --shadow-lg:  0 10px 26px -8px rgba(31, 18, 12, 0.16), 0 38px 80px -28px rgba(31, 18, 12, 0.46);
+  --shadow-ember: 0 6px 16px -4px rgba(184, 72, 28, 0.35), 0 20px 44px -14px rgba(217, 98, 43, 0.50);
+
+  /* — Layout — */
+  --maxw: 1180px;
+  --nav-h: 76px;
+
+  /* — Movimiento: UNA sola curva en todo el sitio + duraciones consistentes — */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);   /* ease-out fuerte (entradas y hovers) */
+  --dur-fast: 140ms;   /* feedback de pulsación */
+  --dur:      240ms;   /* hover y micro-interacciones */
+  --dur-slow: 480ms;   /* elementos grandes / superficies */
+  --dur-reveal: 720ms; /* entrada al hacer scroll */
+}
+
+/* ============================================================
+   2. RESET / BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text);
+  background-color: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+::selection { background: var(--ember); color: #fff; }
+
+:focus-visible {
+  outline: 3px solid var(--ember);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* — Tipografía display — */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  line-height: 1.08;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* ============================================================
+   3. UTILIDADES DE LAYOUT
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+}
+
+.section { padding-block: clamp(4rem, 9vw, 7.5rem); }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ember-deep);
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ember), var(--gold));
+  border-radius: 2px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  margin-top: 0.9rem;
+  max-width: 16ch;
+}
+.section-title .accent { color: var(--ember-deep); font-style: italic; }
+
+.section-intro {
+  color: var(--text-soft);
+  max-width: 56ch;
+  margin-top: 1.1rem;
+  font-size: 1.075rem;
+  text-wrap: pretty;
+}
+
+.section-head { margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+.section-head.center { text-align: center; }
+.section-head.center .section-title,
+.section-head.center .section-intro { margin-inline: auto; }
+
+/* ============================================================
+   4. BOTONES
+   ============================================================ */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
+  padding: 0.95rem 1.7rem;
+  border-radius: 999px;
+  min-height: 52px;
+  overflow: hidden;          /* contiene el barrido de luz */
+  isolation: isolate;
+  transition: transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease),
+              background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
+}
+.btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+/* Feedback de pulsación: el botón responde al toque y al clic (Emil) */
+.btn:active { transform: translateY(-1px) scale(0.97); transition-duration: var(--dur-fast); }
+
+/* Barrido de luz sutil en hover: hace que el CTA se sienta "vivo" */
+.btn-primary::after,
+.btn-light::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%);
+  transform: translateX(-130%);
+  transition: transform 0.7s var(--ease);
+}
+.btn-primary:hover::after,
+.btn-light:hover::after { transform: translateX(130%); }
+
+.btn-primary {
+  background: linear-gradient(135deg, #e2723a 0%, var(--ember) 46%, var(--ember-deep) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-ember), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px -6px rgba(184, 72, 28, 0.45),
+              0 26px 54px -14px rgba(217, 98, 43, 0.62),
+              inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.btn-ghost {
+  background: rgba(244, 231, 214, 0.04);
+  color: var(--text-on-dark);
+  border: 1.5px solid rgba(244, 231, 214, 0.4);
+}
+.btn-ghost:hover {
+  background: rgba(244, 231, 214, 0.12);
+  border-color: rgba(244, 231, 214, 0.78);
+  transform: translateY(-3px);
+}
+
+.btn-dark {
+  background: linear-gradient(135deg, #3a2415 0%, var(--espresso) 100%);
+  color: var(--cream);
+  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.btn-dark:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+
+/* ============================================================
+   5. NAVBAR FIJA
+   ============================================================ */
+.navbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--nav-h);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  transition: background-color var(--dur-slow) var(--ease), box-shadow var(--dur-slow) var(--ease),
+              backdrop-filter var(--dur-slow) var(--ease);
+}
+.navbar.scrolled {
+  background: rgba(253, 250, 244, 0.88);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  box-shadow: 0 1px 0 var(--line), 0 10px 30px -18px rgba(31, 18, 12, 0.4);
+}
+
+.nav-inner {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* — Logo en texto — */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--text-strong);
+  transition: transform var(--dur) var(--ease);
+}
+.logo:hover { transform: translateY(-1px); }
+.logo:active { transform: scale(0.99); transition-duration: var(--dur-fast); }
+
+/* Emblema de marca */
+.logo-mark {
+  width: 40px; height: 40px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 3px 6px rgba(184, 72, 28, 0.35));
+  transition: transform var(--dur) var(--ease);
+}
+.logo:hover .logo-mark { transform: rotate(-5deg) scale(1.06); }
+
+/* Lockup tipográfico */
+.logo-text { display: inline-flex; flex-direction: column; line-height: 1.02; }
+.logo-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.24rem;
+  letter-spacing: -0.005em;
+  color: var(--text-strong);
+  transition: color var(--dur-slow) var(--ease);
+}
+.logo-name .amp {
+  color: var(--gold-ink);
+  font-style: italic;
+  font-weight: 500;
+  padding: 0 0.05em;
+}
+.logo-name .logo-sabor { color: var(--ember-deep); font-weight: 600; }
+.logo-tagline {
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-top: 4px;
+  transition: color var(--dur-slow) var(--ease);
+}
+
+/* Estado claro (sobre hero oscuro): texto del logo + enlaces en tono claro */
+.navbar:not(.scrolled) .logo,
+.navbar:not(.scrolled) .nav-links a { color: var(--text-on-dark); }
+.navbar:not(.scrolled) .logo-name { color: var(--text-on-dark); }
+.navbar:not(.scrolled) .logo-name .amp,
+.navbar:not(.scrolled) .logo-name .logo-sabor { color: var(--gold-soft); }
+.navbar:not(.scrolled) .logo-tagline { color: var(--text-on-dark-soft); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.nav-links a {
+  position: relative;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  padding-block: 0.4rem;
+  transition: color var(--dur) var(--ease);
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--ember);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur) var(--ease);
+}
+.nav-links a:hover { color: var(--ember); }
+.navbar:not(.scrolled) .nav-links a:hover { color: var(--gold-soft); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+.nav-cta { margin-left: 0.5rem; }
+.nav-cta .btn { padding: 0.7rem 1.3rem; min-height: 46px; font-size: 0.9rem; }
+
+/* — Botón hamburguesa (móvil) — */
+.nav-toggle {
+  display: none;
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 110;
+}
+.nav-toggle span {
+  position: absolute;
+  width: 22px; height: 2px;
+  background: var(--text-strong);
+  border-radius: 2px;
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.navbar:not(.scrolled) .nav-toggle span { background: var(--text-on-dark); }
+.nav-toggle span:nth-child(1) { transform: translateY(-6px); }
+.nav-toggle span:nth-child(3) { transform: translateY(6px); }
+body.nav-open .nav-toggle span:nth-child(1) { transform: rotate(45deg); }
+body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+body.nav-open .nav-toggle span:nth-child(3) { transform: rotate(-45deg); }
+body.nav-open .nav-toggle span { background: var(--text-on-dark); }
+
+/* ============================================================
+   6. HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+  /* Foto real de fondo (carne a la parrilla) + overlays degradados en capas:
+     uno horizontal para legibilidad del texto a la izquierda, uno vertical para
+     el desvanecido inferior, y un glow de brasa cálido arriba a la derecha. */
+  background:
+    linear-gradient(102deg, rgba(16, 9, 5, 0.90) 0%, rgba(16, 9, 5, 0.64) 40%, rgba(16, 9, 5, 0.30) 70%, rgba(16, 9, 5, 0.46) 100%),
+    linear-gradient(180deg, rgba(16, 9, 5, 0.12) 55%, rgba(16, 9, 5, 0.80) 100%),
+    radial-gradient(120% 90% at 82% 4%, rgba(224, 110, 50, 0.42) 0%, transparent 56%),
+    url("https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=1950&q=80") center / cover no-repeat,
+    linear-gradient(155deg, #2c1a10 0%, #1f120c 55%, #160c07 100%);
+  overflow: hidden;
+}
+
+/* Glow de brasas + textura sutil */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 50% 115%, rgba(217, 98, 43, 0.5) 0%, transparent 60%);
+  z-index: -1;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* textura de grano sutil para evitar el aspecto "plano de plantilla" */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-inner {
+  display: grid;
+  gap: 2rem;
+  padding-block: calc(var(--nav-h) + 2rem) 4rem;
+  max-width: 900px;
+}
+
+.hero .eyebrow { color: var(--gold-soft); }
+.hero .eyebrow::before { background: linear-gradient(90deg, var(--gold), var(--ember)); }
+
+.hero h1 {
+  font-size: clamp(2.9rem, 9vw, 6rem);
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+}
+.hero h1 .line { display: block; }
+.hero h1 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--gold-soft);
+}
+
+.hero p.slogan {
+  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+  color: var(--text-on-dark-soft);
+  max-width: 46ch;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: 1.5rem;
+  /* separa los stats del indicador "Desliza" anclado al fondo del hero */
+  margin-bottom: clamp(2.5rem, 7vh, 5rem);
+  padding-top: 2rem;
+  border-top: 1px solid rgba(244, 231, 214, 0.16);
+}
+.hero-meta .stat .num {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--gold-soft);
+  display: block;
+  line-height: 1;
+}
+.hero-meta .stat .label {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-on-dark-soft);
+  margin-top: 0.45rem;
+}
+
+/* Indicador de scroll */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 1.8rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-on-dark-soft);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.scroll-cue .mouse {
+  width: 24px; height: 38px;
+  border: 1.5px solid rgba(244, 231, 214, 0.45);
+  border-radius: 14px;
+  position: relative;
+}
+.scroll-cue .mouse::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 7px;
+  width: 3px; height: 7px;
+  background: var(--gold-soft);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  animation: wheel 1.8s var(--ease) infinite;
+}
+@keyframes wheel {
+  0% { opacity: 0; transform: translate(-50%, 0); }
+  35% { opacity: 1; }
+  70%, 100% { opacity: 0; transform: translate(-50%, 12px); }
+}
+
+/* ============================================================
+   7. NOSOTROS
+   ============================================================ */
+/* Profundidad sutil: brillo cálido arriba que cae a crema (no un plano sólido) */
+.about {
+  background:
+    radial-gradient(90% 60% at 70% -10%, rgba(217, 98, 43, 0.05) 0%, transparent 60%),
+    linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+.about-copy p {
+  color: var(--text-soft);
+  font-size: 1.1rem;
+  margin-top: 1.2rem;
+  text-wrap: pretty;
+}
+.about-copy p.lead {
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.about-signature {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.about-signature .sig {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--ember-deep);
+}
+.about-signature .role {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  letter-spacing: 0.05em;
+}
+
+/* Tarjeta visual "leña" */
+.about-visual {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background:
+    radial-gradient(90% 70% at 70% 10%, rgba(217, 98, 43, 0.6), transparent 60%),
+    linear-gradient(150deg, #3a2415 0%, #241509 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 2rem;
+}
+/* Foto real del ambiente del restaurante (cubre la tarjeta). */
+.about-visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transform: scale(1.03);
+  transition: transform 1.2s var(--ease);
+}
+.about-visual:hover img { transform: scale(1.08); }
+/* Overlay cálido degradado para que la cita y los badges sean legibles. */
+.about-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(20, 11, 6, 0.3) 0%, rgba(31, 18, 12, 0.15) 38%, rgba(20, 11, 6, 0.88) 100%);
+}
+.about-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+}
+.about-visual .quote {
+  position: relative;
+  z-index: 3;
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-style: italic;
+  line-height: 1.35;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+}
+.about-visual .quote span { color: var(--gold-soft); }
+
+.about-badges {
+  position: absolute;
+  top: 1.5rem; left: 1.5rem;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.about-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(253, 250, 244, 0.12);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(244, 231, 214, 0.2);
+  color: var(--cream);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+.about-badge svg { width: 15px; height: 15px; color: var(--gold-soft); }
+
+/* ============================================================
+   8. MENÚ
+   ============================================================ */
+.menu {
+  position: relative;
+  background:
+    radial-gradient(80% 50% at 50% 0%, var(--paper) 0%, transparent 70%),
+    linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 100%);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.25rem, 2.4vw, 2rem);
+  align-items: start;
+}
+
+.menu-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.6rem, 3vw, 2.2rem);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur-slow) var(--ease),
+              box-shadow var(--dur-slow) var(--ease),
+              border-color var(--dur) var(--ease);
+  height: 100%;
+}
+.menu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+  border-color: rgba(217, 98, 43, 0.28);
+}
+
+.menu-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-bottom: 1.2rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px dashed var(--line);
+}
+.menu-card-head .ic {
+  width: 46px; height: 46px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(217, 98, 43, 0.14), rgba(205, 163, 73, 0.14));
+  color: var(--ember-deep);
+  transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.menu-card:hover .ic {
+  transform: scale(1.08) rotate(-3deg);
+  background: linear-gradient(135deg, rgba(217, 98, 43, 0.22), rgba(205, 163, 73, 0.2));
+}
+.menu-card-head .ic svg { width: 24px; height: 24px; }
+.menu-card-head h3 { font-size: 1.4rem; }
+.menu-card-head .cat-note {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  font-weight: 600;
+}
+
+.dish {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.4rem 1rem;
+  padding-block: 0.95rem;
+  border-bottom: 1px solid var(--line);
+  transition: transform var(--dur) var(--ease);
+}
+.dish:last-child { border-bottom: none; padding-bottom: 0; }
+.dish:hover { transform: translateX(6px); }
+
+.dish .name {
+  font-weight: 600;
+  color: var(--text-strong);
+  font-size: 1.04rem;
+  line-height: 1.35;
+  text-wrap: pretty;
+  transition: color var(--dur) var(--ease);
+}
+.dish:hover .name { color: var(--ember-deep); }
+.dish .name .tag {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.35rem;
+  white-space: nowrap;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ember-deep);
+  background: rgba(217, 98, 43, 0.12);
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+}
+.dish .price {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ember-deep);
+  white-space: nowrap;
+}
+.dish .desc {
+  grid-column: 1 / -1;
+  font-size: 0.92rem;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+
+.menu-foot {
+  text-align: center;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  color: var(--text-soft);
+  font-size: 0.95rem;
+}
+.menu-foot strong { color: var(--text-strong); }
+.menu-foot a {
+  color: var(--ember-deep);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color var(--dur) var(--ease);
+}
+.menu-foot a:hover { color: var(--ember); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ============================================================
+   9. GALERÍA
+   ============================================================ */
+.gallery {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(90% 70% at 15% -5%, rgba(217, 98, 43, 0.16) 0%, transparent 55%),
+    radial-gradient(80% 60% at 95% 110%, rgba(205, 163, 73, 0.10) 0%, transparent 50%),
+    linear-gradient(165deg, #31200f 0%, var(--espresso) 45%, #1d1108 100%);
+}
+/* Grano fino para textura premium sobre el fondo oscuro */
+.gallery::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.gallery > .container { position: relative; z-index: 1; }
+.gallery .eyebrow { color: var(--gold-soft); }
+.gallery .eyebrow::before { background: linear-gradient(90deg, var(--gold), var(--ember)); }
+.gallery .section-title { color: var(--cream); }
+.gallery .section-title .accent { color: var(--gold-soft); }
+.gallery .section-intro { color: var(--text-on-dark-soft); }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.gcard {
+  position: relative;
+  aspect-ratio: 4 / 3.4;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  isolation: isolate;
+  transition: transform var(--dur-slow) var(--ease), box-shadow var(--dur-slow) var(--ease);
+}
+.gcard:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+/* Gradientes cálidos como placeholder de imagen */
+.gcard.g1 { background: linear-gradient(150deg, #e08a3c 0%, #b8481c 100%); }
+.gcard.g2 { background: linear-gradient(150deg, #c9772e 0%, #7a3414 100%); }
+.gcard.g3 { background: linear-gradient(150deg, #d9a441 0%, #a85e1e 100%); }
+.gcard.g4 { background: linear-gradient(150deg, #b5552a 0%, #5e2810 100%); }
+.gcard.g5 { background: linear-gradient(150deg, #e0a23c 0%, #b06a1e 100%); }
+.gcard.g6 { background: linear-gradient(150deg, #cf6b2c 0%, #6e2c12 100%); }
+
+/* Foto real del plato: cubre la tarjeta con zoom suave en hover.
+   El gradiente de fallback (g1..g6) queda detrás por si la imagen no carga. */
+.gcard img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transform: scale(1.02);
+  transition: transform var(--dur-slow) var(--ease);
+}
+.gcard:hover img { transform: scale(1.1); }
+
+.gcard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+.gcard .overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(0deg, rgba(22, 12, 7, 0.85) 0%, rgba(22, 12, 7, 0.1) 45%, transparent 70%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.4rem;
+  transition: background var(--dur-slow) var(--ease);
+}
+.gcard .icon-plate {
+  position: absolute;
+  top: 1.2rem; left: 1.2rem;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: 11px;
+  background: rgba(253, 250, 244, 0.16);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(244, 231, 214, 0.25);
+  color: var(--cream);
+  z-index: 3;
+  transform: translateY(-6px);
+  opacity: 0;
+  transition: transform var(--dur-slow) var(--ease), opacity var(--dur-slow) var(--ease);
+}
+.gcard .icon-plate svg { width: 20px; height: 20px; }
+.gcard h3 {
+  position: relative;
+  color: var(--cream);
+  font-size: 1.35rem;
+  transform: translateY(8px);
+  transition: transform var(--dur-slow) var(--ease);
+}
+.gcard .gcat {
+  position: relative;
+  color: var(--gold-soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 0.3rem;
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(8px);
+  transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease), max-height var(--dur-slow) var(--ease);
+}
+.gcard:hover .overlay { background: linear-gradient(0deg, rgba(22, 12, 7, 0.92) 0%, rgba(122, 52, 20, 0.35) 55%, rgba(217, 98, 43, 0.12) 100%); }
+.gcard:hover h3 { transform: translateY(0); }
+.gcard:hover .gcat { opacity: 1; max-height: 2rem; transform: translateY(0); }
+.gcard:hover .icon-plate { transform: translateY(0); opacity: 1; }
+
+/* Realce sutil de borde en hover */
+.gcard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1.5px rgba(227, 200, 127, 0);
+  transition: box-shadow var(--dur-slow) var(--ease);
+  pointer-events: none;
+}
+.gcard:hover::after { box-shadow: inset 0 0 0 1.5px rgba(227, 200, 127, 0.55); }
+
+/* ============================================================
+   10. TESTIMONIOS / PRUEBA SOCIAL
+   ============================================================ */
+.reviews { background: linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%); }
+
+.reviews-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.reviews-rating .score {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--text-strong);
+  line-height: 1;
+}
+.reviews-rating .count { color: var(--text-soft); font-size: 0.95rem; }
+
+/* Estrellas (dorado oscuro accesible) */
+.stars { display: inline-flex; gap: 2px; color: var(--gold-ink); }
+.stars .star { width: 18px; height: 18px; fill: currentColor; }
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 3vw, 2rem);
+  align-items: stretch;
+}
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur-slow) var(--ease),
+              box-shadow var(--dur-slow) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+.review:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+  border-color: rgba(217, 98, 43, 0.28);
+}
+.review .stars { width: max-content; }
+.review blockquote {
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: auto;
+  padding-top: 0.4rem;
+}
+.review-avatar {
+  width: 46px; height: 46px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--ember), var(--ember-deep));
+  box-shadow: var(--shadow-ember);
+}
+.review-author .who { font-weight: 600; color: var(--text-strong); }
+.review-author .ctx { font-size: 0.85rem; color: var(--text-soft); }
+
+/* ============================================================
+   11. UBICACIÓN Y HORARIOS
+   ============================================================ */
+.location {
+  background:
+    radial-gradient(70% 50% at 85% 0%, rgba(205, 163, 73, 0.06) 0%, transparent 55%),
+    linear-gradient(180deg, var(--cream-2) 0%, var(--paper) 100%);
+}
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: stretch;
+}
+
+.info-stack { display: grid; gap: 1.25rem; }
+.info-card {
+  display: flex;
+  gap: 1.1rem;
+  padding: 1.6rem;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: rgba(217, 98, 43, 0.28);
+}
+.info-card .ic {
+  width: 48px; height: 48px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--ember), var(--ember-deep));
+  color: #fff;
+  box-shadow: var(--shadow-ember);
+  transition: transform var(--dur) var(--ease);
+}
+.info-card:hover .ic { transform: scale(1.08) rotate(-3deg); }
+.info-card .ic svg { width: 24px; height: 24px; }
+.info-card h3 { font-size: 1.15rem; margin-bottom: 0.35rem; }
+.info-card p { color: var(--text-soft); font-size: 0.98rem; line-height: 1.6; }
+.info-card a.maplink {
+  color: var(--ember-deep);
+  font-weight: 600;
+  font-size: 0.92rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+.info-card a.maplink:hover { text-decoration: underline; }
+
+/* Tabla de horarios */
+.hours-list { margin-top: 0.6rem; display: grid; gap: 0.45rem; width: 100%; }
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+  padding-block: 0.15rem;
+}
+.hours-row .day { color: var(--text); font-weight: 500; }
+.hours-row .time { color: var(--text-soft); font-variant-numeric: tabular-nums; }
+.hours-row.today .day { color: var(--ember-deep); font-weight: 700; }
+.hours-row.today .time {
+  color: var(--ember-deep);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.hours-row.today .time::before {
+  content: "";
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #2faa5e;
+  box-shadow: 0 0 0 3px rgba(47, 170, 94, 0.2);
+}
+
+/* Mapa simulado / panel de reserva */
+.map-panel {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  min-height: 360px;
+  display: flex;
+  align-items: flex-end;
+  padding: 2rem;
+  /* gradiente cálido visible solo mientras carga el mapa real */
+  background: linear-gradient(160deg, #34200f 0%, #1c1008 100%);
+}
+/* Mapa real de Google embebido: cubre todo el panel de forma responsive */
+.map-embed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  filter: saturate(1.05);
+}
+
+.map-card {
+  position: relative;
+  z-index: 1;   /* por encima del iframe del mapa */
+  background: rgba(253, 250, 244, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+  box-shadow: var(--shadow);
+  max-width: 320px;
+}
+.map-card h3 { font-size: 1.2rem; }
+.map-card p { font-size: 0.9rem; color: var(--text-soft); margin-top: 0.3rem; margin-bottom: 1rem; }
+.map-card .btn { width: 100%; }
+
+/* ============================================================
+   11. CTA FRANJA
+   ============================================================ */
+.cta-strip {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  background:
+    radial-gradient(90% 120% at 12% -12%, rgba(245, 158, 90, 0.42) 0%, transparent 52%),
+    radial-gradient(85% 120% at 100% 115%, rgba(110, 44, 18, 0.55) 0%, transparent 55%),
+    linear-gradient(135deg, #c8521f 0%, var(--ember-deep) 40%, #7a3414 100%);
+}
+.cta-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.cta-strip > .container { position: relative; z-index: 1; }
+.cta-strip .section-title { color: #fff; margin-inline: auto; }
+.cta-strip .section-title .accent { color: var(--gold-soft); }
+.cta-strip p { color: #fff; max-width: 50ch; margin: 1rem auto 2rem; text-wrap: pretty; }
+.cta-strip .btn-light {
+  background: var(--cream);
+  color: var(--ember-deep);
+  box-shadow: 0 14px 36px -10px rgba(0,0,0,0.4);
+}
+.cta-strip .btn-light:hover { transform: translateY(-3px); box-shadow: 0 22px 46px -12px rgba(0,0,0,0.5); }
+
+/* ============================================================
+   12. FOOTER
+   ============================================================ */
+.footer {
+  position: relative;
+  background: linear-gradient(180deg, #261609 0%, var(--ink) 42%);
+  color: var(--text-on-dark-soft);
+  padding-block: clamp(3.5rem, 7vw, 5rem) 2rem;
+}
+/* Hairline de brasa que enmarca el footer por arriba */
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(217, 98, 43, 0.55) 28%, rgba(205, 163, 73, 0.55) 72%, transparent 100%);
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(244, 231, 214, 0.12);
+}
+.footer .logo { margin-bottom: 1.1rem; }
+.footer .logo-mark { width: 44px; height: 44px; }
+.footer .logo-name { color: var(--cream); font-size: 1.34rem; }
+.footer .logo-name .amp,
+.footer .logo-name .logo-sabor { color: var(--gold-soft); }
+.footer .logo-tagline { color: var(--text-on-dark-soft); }
+.footer-about p { font-size: 0.95rem; max-width: 38ch; line-height: 1.7; }
+
+.footer-col h4 {
+  font-family: var(--font-body);
+  color: var(--cream);
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+  font-weight: 600;
+}
+.footer-col ul { display: grid; gap: 0.7rem; }
+.footer-col a {
+  font-size: 0.95rem;
+  display: inline-block;
+  transition: color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.footer-col a:hover { color: var(--gold-soft); transform: translateX(3px); }
+
+.socials { display: flex; gap: 0.7rem; margin-top: 0.3rem; }
+.socials a {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border-radius: 12px;
+  border: 1px solid rgba(244, 231, 214, 0.18);
+  color: var(--cream);
+  transition: transform var(--dur) var(--ease),
+              background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+.socials a:hover {
+  background: var(--ember);
+  border-color: var(--ember);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: var(--shadow-ember);
+}
+.socials a:active { transform: translateY(-1px) scale(0.96); transition-duration: var(--dur-fast); }
+.socials a svg { width: 19px; height: 19px; }
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 2rem;
+  font-size: 0.85rem;
+}
+.footer-bottom .credit { color: rgba(244, 231, 214, 0.5); }
+.footer-bottom .credit a { color: var(--gold-soft); font-weight: 500; }
+
+/* ============================================================
+   13. BOTÓN FLOTANTE WHATSAPP
+   ============================================================ */
+.wa-float {
+  position: fixed;
+  right: clamp(1rem, 3vw, 1.75rem);
+  bottom: clamp(1rem, 3vw, 1.75rem);
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #2ce16f 0%, #25D366 45%, #1faf57 100%);
+  color: #fff;
+  padding: 0.9rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 16px -4px rgba(31, 175, 87, 0.45),
+              0 16px 36px -10px rgba(37, 211, 102, 0.55),
+              inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.wa-float svg { width: 26px; height: 26px; flex-shrink: 0; }
+.wa-float .wa-label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width var(--dur-slow) var(--ease), opacity var(--dur) var(--ease);
+}
+.wa-float:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 22px -6px rgba(31, 175, 87, 0.5),
+              0 24px 50px -10px rgba(37, 211, 102, 0.65),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.wa-float:active { transform: translateY(-1px) scale(0.97); transition-duration: var(--dur-fast); }
+.wa-float:hover .wa-label { max-width: 160px; opacity: 1; }
+/* Anillo pulsante: señal de vida discreta, no intrusiva */
+.wa-float::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid rgba(37, 211, 102, 0.6);
+  animation: waPulse 2.8s var(--ease) infinite;
+  pointer-events: none;
+}
+@keyframes waPulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  70%, 100% { transform: scale(1.45); opacity: 0; }
+}
+
+/* ============================================================
+   14. ANIMACIONES DE ENTRADA (scroll reveal)
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px) scale(0.99);
+  transition: opacity var(--dur-reveal) var(--ease), transform var(--dur-reveal) var(--ease);
+}
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-delay="1"] { transition-delay: 70ms; }
+.reveal[data-delay="2"] { transition-delay: 140ms; }
+.reveal[data-delay="3"] { transition-delay: 210ms; }
+.reveal[data-delay="4"] { transition-delay: 280ms; }
+.reveal[data-delay="5"] { transition-delay: 350ms; }
+
+/* ============================================================
+   15. RESPONSIVE
+   ============================================================ */
+@media (max-width: 980px) {
+  .menu-grid { grid-template-columns: repeat(2, 1fr); max-width: 760px; margin-inline: auto; }
+  .reviews-grid { grid-template-columns: 1fr; max-width: 640px; margin-inline: auto; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-visual { aspect-ratio: 16 / 11; max-width: 560px; margin-inline: auto; width: 100%; }
+  .location-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .footer-about { grid-column: 1 / -1; }
+}
+
+@media (max-width: 720px) {
+  /* Menú: una sola columna en móvil */
+  .menu-grid { grid-template-columns: 1fr; max-width: 460px; }
+  /* — Navegación móvil — */
+  .nav-toggle { display: inline-flex; }
+  .nav-cta { display: none; }
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.8rem;
+    background: linear-gradient(160deg, #2c1a10, #160c07);
+    padding: 2rem;
+    transform: translateX(100%);
+    visibility: hidden;   /* fuera del orden de tabulación cuando está cerrado */
+    transition: transform var(--dur-slow) var(--ease), visibility 0s linear var(--dur-slow);
+  }
+  body.nav-open .nav-links {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform var(--dur-slow) var(--ease), visibility 0s;
+  }
+  .nav-links a {
+    color: var(--cream) !important;
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+  }
+  body.nav-open .nav-links a { opacity: 1; transform: none; }
+  body.nav-open .nav-links li:nth-child(1) a { transition-delay: 0.10s; }
+  body.nav-open .nav-links li:nth-child(2) a { transition-delay: 0.16s; }
+  body.nav-open .nav-links li:nth-child(3) a { transition-delay: 0.22s; }
+  body.nav-open .nav-links li:nth-child(4) a { transition-delay: 0.28s; }
+  body.nav-open .nav-links li:nth-child(5) a { transition-delay: 0.34s; }
+  body.nav-open .nav-links li:nth-child(6) a { transition-delay: 0.40s; }
+  .nav-links .mobile-cta { display: inline-flex; margin-top: 0.5rem; }
+
+  .hero { text-align: left; }
+  .hero-meta { gap: 1.5rem 2rem; }
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-about { grid-column: auto; }
+  .wa-float .wa-label { display: none; }
+}
+
+@media (max-width: 460px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .hero-actions { width: 100%; }
+  .hero-actions .btn { width: 100%; }
+  .hero-meta .stat .num { font-size: 1.6rem; }
+}
+
+/* Mostrar CTA móvil solo dentro del menú desplegable */
+.nav-links .mobile-cta { display: none; }
+
+/* ============================================================
+   16. TÁCTIL: evita estados hover "pegados" al tocar en móvil
+   ============================================================ */
+@media (hover: none) {
+  .btn:hover, .btn-primary:hover, .btn-ghost:hover, .btn-dark:hover,
+  .cta-strip .btn-light:hover,
+  .menu-card:hover, .gcard:hover, .info-card:hover,
+  .socials a:hover, .wa-float:hover { transform: none; }
+  .menu-card:hover .ic, .info-card:hover .ic { transform: none; }
+  .gcard:hover img, .about-visual:hover img { transform: scale(1.02); }
+  .dish:hover { transform: none; }
+  .dish:hover .name { color: var(--text-strong); }
+  .btn-primary:hover::after, .btn-light:hover::after { transform: translateX(-130%); }
+}
+
+/* ============================================================
+   17. ACCESIBILIDAD: reduce motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+
+<!-- Fallback sin JavaScript: si el JS no corre, las entradas no deben ocultar contenido -->
+<noscript>
+  <style>
+    .reveal { opacity: 1 !important; transform: none !important; }
+  </style>
+</noscript>
+</head>
+
+<body>
+
+<!-- Definiciones SVG reutilizables: gradientes de marca, estrella y emblema del logo -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="bm-flame" x1="24" y1="8" x2="24" y2="37" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f3daa2"/>
+      <stop offset="0.46" stop-color="#e1843b"/>
+      <stop offset="1" stop-color="#b8481c"/>
+    </linearGradient>
+    <linearGradient id="bm-inner" x1="24" y1="19" x2="24" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fdf0cf"/>
+      <stop offset="1" stop-color="#f4b15a"/>
+    </linearGradient>
+    <linearGradient id="bm-ring" x1="7" y1="7" x2="41" y2="41" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6cd86"/>
+      <stop offset="1" stop-color="#cf6a2e"/>
+    </linearGradient>
+  </defs>
+  <symbol id="ico-star" viewBox="0 0 24 24"><path d="M12 2.6l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.6l-5.88 3.09 1.12-6.55L2.5 9.52l6.58-.96L12 2.6z"/></symbol>
+  <!-- Emblema de marca: sello circular artesanal + llama de dos tonos con brillo interior -->
+  <symbol id="brand-emblem" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="21" fill="none" stroke="url(#bm-ring)" stroke-width="1.6"/>
+    <circle cx="24" cy="24" r="17.6" fill="none" stroke="url(#bm-ring)" stroke-width="0.8" opacity="0.45"/>
+    <circle cx="10.4" cy="24" r="0.95" fill="url(#bm-ring)"/>
+    <circle cx="37.6" cy="24" r="0.95" fill="url(#bm-ring)"/>
+    <path d="M24 9 C 27 14 24.5 16 26 19 C 27 21 30 22.5 31 26 C 32.5 31 29 36 24 36 C 19 36 15.5 31.5 17 26.5 C 18 23 20 21 20.5 17.5 C 21 14.5 20 12.5 20.5 10 C 21.6 11.5 22.8 11 24 9 Z" fill="url(#bm-flame)"/>
+    <path d="M24 19 C 25.5 21.5 27 23 27 26.5 C 27 29.8 24.8 32 24 32 C 22 32 20.8 30 21 27.5 C 21.2 24.5 22.8 22.5 24 19 Z" fill="url(#bm-inner)" opacity="0.92"/>
+  </symbol>
+</svg>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<header class="navbar" id="navbar">
+  <nav class="nav-inner" aria-label="Navegación principal">
+    <a href="#inicio" class="logo" aria-label="La Leña y Sabor — Parrilla en Cali, ir al inicio">
+      <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true"><use href="#brand-emblem"/></svg>
+      <span class="logo-text">
+        <span class="logo-name">La&nbsp;Leña <span class="amp">&amp;</span> <span class="logo-sabor">Sabor</span></span>
+        <span class="logo-tagline">Parrilla · Cali</span>
+      </span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#menu">Menú</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#resenas">Reseñas</a></li>
+      <li><a href="#ubicacion">Ubicación</a></li>
+      <li class="mobile-cta">
+        <a class="btn btn-primary" href="https://wa.me/573001234567?text=Hola%20La%20Le%C3%B1a%20%26%20Sabor%2C%20quiero%20reservar%20una%20mesa" target="_blank" rel="noopener">Reservar</a>
+      </li>
+    </ul>
+
+    <div class="nav-cta">
+      <a class="btn btn-primary" href="https://wa.me/573001234567?text=Hola%20La%20Le%C3%B1a%20%26%20Sabor%2C%20quiero%20reservar%20una%20mesa" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>
+        Reservar
+      </a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero" id="inicio">
+    <div class="container">
+      <div class="hero-inner">
+        <span class="eyebrow reveal">Parrilla &amp; cocina típica · Cali</span>
+        <h1 class="reveal" data-delay="1">
+          <span class="line">El sabor que</span>
+          <span class="line">nace de la <em>leña</em>.</span>
+        </h1>
+        <p class="slogan reveal" data-delay="2">
+          Carnes a la brasa, recetas de tradición y el aroma que solo da el fuego lento.
+          En el corazón de Cali, cocinamos como en casa: con paciencia, fuego y cariño.
+        </p>
+        <div class="hero-actions reveal" data-delay="3">
+          <a class="btn btn-primary" href="https://wa.me/573001234567?text=Hola%20La%20Le%C3%B1a%20%26%20Sabor%2C%20quiero%20reservar%20una%20mesa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>
+            Reservar por WhatsApp
+          </a>
+          <a class="btn btn-ghost" href="#menu">Ver el menú</a>
+        </div>
+
+        <div class="hero-meta reveal" data-delay="4">
+          <div class="stat"><span class="num">18</span><span class="label">Años de tradición</span></div>
+          <div class="stat"><span class="num">100%</span><span class="label">Cocción a la leña</span></div>
+          <div class="stat"><span class="num">4.9★</span><span class="label">Reseñas de clientes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#nosotros" class="scroll-cue" aria-label="Bajar a la sección Nosotros">
+      <span class="mouse" aria-hidden="true"></span>
+      Desliza
+    </a>
+  </section>
+
+  <!-- ============================================================
+       NOSOTROS
+  ============================================================ -->
+  <section class="section about" id="nosotros">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-copy">
+          <span class="eyebrow reveal">Nuestra historia</span>
+          <h2 class="section-title reveal" data-delay="1">Tradición que se <span class="accent">cocina lento</span>.</h2>
+          <p class="lead reveal" data-delay="2">
+            La Leña &amp; Sabor nació en 2008 de una idea sencilla: cocinar con fuego de verdad.
+          </p>
+          <p class="reveal" data-delay="3">
+            Empezamos con una sola parrilla y la receta de la abuela. Hoy seguimos encendiendo la leña
+            cada mañana, porque creemos que el sabor no se apura. Aquí la carne se ahúma despacio, el
+            sancocho hierve a fuego de palo y cada plato lleva el cariño de una cocina familiar caleña.
+          </p>
+          <div class="about-signature reveal" data-delay="4">
+            <span class="sig">Familia Restrepo</span>
+            <span class="role">Fundadores · La Leña &amp; Sabor</span>
+          </div>
+        </div>
+
+        <div class="about-visual reveal" data-delay="2">
+          <img decoding="async" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Ambiente cálido del restaurante La Leña & Sabor" loading="lazy" />
+          <div class="about-badges">
+            <span class="about-badge"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2c1.5 3.5-1 5-1 7 0 1.2.8 2 2 2s2-1 1.5-3c2 1.5 3.5 4 3.5 6.5A6 6 0 1 1 6 14.5C6 11 9 8.5 9 6"/></svg> Carne ahumada al instante</span>
+            <span class="about-badge"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Ingredientes del Valle</span>
+          </div>
+          <p class="quote">"El fuego no se apura.<br><span>Se respeta."</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MENÚ
+  ============================================================ -->
+  <section class="section menu" id="menu">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow reveal">Nuestra carta</span>
+        <h2 class="section-title reveal" data-delay="1">Del fogón <span class="accent">a tu mesa</span></h2>
+        <p class="section-intro reveal" data-delay="2">
+          Platos preparados al momento sobre brasa de leña. Precios en pesos colombianos, porciones generosas para compartir.
+        </p>
+      </div>
+
+      <div class="menu-grid">
+
+        <!-- Entradas -->
+        <article class="menu-card reveal" data-delay="1">
+          <div class="menu-card-head">
+            <span class="ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18M5 11a7 7 0 0 1 14 0M12 4v0M8 21h8M12 18v3"/></svg></span>
+            <div><span class="cat-note">Para empezar</span><h3>Entradas</h3></div>
+          </div>
+          <div class="dish">
+            <span class="name">Empanadas vallunas <span class="tag">Top</span></span>
+            <span class="price">$14.000</span>
+            <span class="desc">Tres empanadas de maíz crujiente rellenas de carne desmechada, con ají de la casa.</span>
+          </div>
+          <div class="dish">
+            <span class="name">Chorizo a la brasa</span>
+            <span class="price">$16.000</span>
+            <span class="desc">Chorizo artesanal ahumado en leña, arepa de chócolo y limón.</span>
+          </div>
+          <div class="dish">
+            <span class="name">Patacón con hogao</span>
+            <span class="price">$13.000</span>
+            <span class="desc">Plátano verde aplastado y frito, coronado con hogao caleño y queso costeño.</span>
+          </div>
+          <div class="dish">
+            <span class="name">Tabla de la casa</span>
+            <span class="price">$28.000</span>
+            <span class="desc">Surtido de chorizo, chicharrón, morcilla y arepa para compartir.</span>
+          </div>
+        </article>
+
+        <!-- Platos fuertes -->
+        <article class="menu-card reveal" data-delay="2">
+          <div class="menu-card-head">
+            <span class="ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18M6 3v6a3 3 0 0 1-3 3M16 3c-1.5 2-1.5 5 0 7 1.5-2 1.5-5 0-7ZM16 10v11"/></svg></span>
+            <div><span class="cat-note">El corazón</span><h3>Platos fuertes</h3></div>
+          </div>
+          <div class="dish">
+            <span class="name">Punta de anca a la leña <span class="tag">Estrella</span></span>
+            <span class="price">$42.000</span>
+            <span class="desc">350g de res madurada a la brasa, papa criolla, ensalada y chimichurri de la casa.</span>
+          </div>
+          <div class="dish">
+            <span class="name">Bandeja paisa caleña</span>
+            <span class="price">$36.000</span>
+            <span class="desc">Frijol, chicharrón, carne molida, chorizo, huevo, arroz, plátano y arepa.</span>
+          </div>
+          <div class="dish">
+            <span class="name">Costillas BBQ ahumadas</span>
+            <span class="price">$39.000</span>
+            <span class="desc">Costilla de cerdo cocida a fuego lento, glaseada con salsa de panela y tamarindo.</span>
+          </div>
+          <div class="dish">
+            <span class="name">Sancocho de gallina</span>
+            <span class="price">$32.000</span>
+            <span class="desc">Cocido a fuego de palo con yuca, plátano y mazorca. Servido con arroz y aguacate.</span>
+          </div>
+        </article>
+
+        <!-- Bebidas -->
+        <article class="menu-card reveal" data-delay="3">
+          <div class="menu-card-head">
+            <span class="ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14l-1.5 9.5A4 4 0 0 1 13.6 16h-3.2a4 4 0 0 1-3.9-3.5L5 3ZM9 20h6M12 16v4"/></svg></span>
+            <div><span class="cat-note">Para refrescar</span><h3>Bebidas</h3></div>
+          </div>
+          <div class="dish">
+            <span class="name">Limonada de coco</span>
+            <span class="price">$9.000</span>
+            <span class="desc">Cremosa, refrescante y bien fría. La favorita de la casa.</span>
+          </div>
+          <div class="dish">
+            <span class="name">Jugo natural en agua</span>
+            <span class="price">$7.500</span>
+            <span class="desc">Lulo, mango, maracuyá, mora o guanábana del Valle, recién exprimido.</span>
+          </div>
+          <div class="dish">
+            <span class="name">Cerveza artesanal</span>
+            <span class="price">$11.000</span>
+            <span class="desc">Selección de cervezas caleñas de barril, rubia o roja.</span>
+          </div>
+          <div class="dish">
+            <span class="name">Aguapanela con limón</span>
+            <span class="price">$6.000</span>
+            <span class="desc">Tradicional, caliente o fría, endulzada con panela de trapiche.</span>
+          </div>
+        </article>
+
+        <!-- Postres -->
+        <article class="menu-card reveal" data-delay="4">
+          <div class="menu-card-head">
+            <span class="ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11h10l-1.1 7.6a2 2 0 0 1-2 1.7H10.1a2 2 0 0 1-2-1.7L7 11Z"/><path d="M6 11a6 3.5 0 0 1 12 0"/><path d="M12 4.4v2.8"/><circle cx="12" cy="3.6" r="1.1"/></svg></span>
+            <div><span class="cat-note">Para endulzar</span><h3>Postres</h3></div>
+          </div>
+          <div class="dish">
+            <span class="name">Postre de la casa <span class="tag">Casa</span></span>
+            <span class="price">$16.000</span>
+            <span class="desc">Un delicioso helado con brownie y un barquillo con salsa de tu elección.</span>
+          </div>
+          <div class="dish">
+            <span class="name">Brevas con arequipe</span>
+            <span class="price">$11.000</span>
+            <span class="desc">Brevas en almíbar de panela rellenas de arequipe, un clásico de la abuela.</span>
+          </div>
+          <div class="dish">
+            <span class="name">Flan de la casa</span>
+            <span class="price">$10.000</span>
+            <span class="desc">Flan casero de caramelo con un toque de café, suave y cremoso.</span>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="menu-foot reveal">
+        ¿Plan en grupo o evento especial? <strong>Armamos un menú a tu medida.</strong>
+        <a href="https://wa.me/573001234567?text=Hola%20La%20Le%C3%B1a%20%26%20Sabor%2C%20quiero%20armar%20un%20men%C3%BA%20para%20un%20evento" target="_blank" rel="noopener">Escríbenos por WhatsApp →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GALERÍA
+  ============================================================ -->
+  <section class="section gallery" id="galeria">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow reveal">Galería</span>
+        <h2 class="section-title reveal" data-delay="1">Lo que sale <span class="accent">de la brasa</span></h2>
+        <p class="section-intro reveal" data-delay="2">
+          Un vistazo a nuestros platos más queridos. El sabor se ve antes de probarse.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <figure class="gcard g1 reveal" data-delay="1">
+          <img decoding="async" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=900&q=80" alt="Parrillada mixta con carnes, pollo y verduras asadas" loading="lazy" />
+          <span class="icon-plate"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1.5 3.5-1 5-1 7 0 1.2.8 2 2 2s2-1 1.5-3c2 1.5 3.5 4 3.5 6.5A6 6 0 1 1 6 14.5"/></svg></span>
+          <figcaption class="overlay"><h3>Parrillada mixta</h3><span class="gcat">Para compartir</span></figcaption>
+        </figure>
+
+        <figure class="gcard g2 reveal" data-delay="2">
+          <img decoding="async" src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80" alt="Costillas BBQ ahumadas a fuego lento" loading="lazy" />
+          <span class="icon-plate"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1.5 3.5-1 5-1 7 0 1.2.8 2 2 2s2-1 1.5-3c2 1.5 3.5 4 3.5 6.5A6 6 0 1 1 6 14.5"/></svg></span>
+          <figcaption class="overlay"><h3>Costillas BBQ</h3><span class="gcat">A fuego lento</span></figcaption>
+        </figure>
+
+        <figure class="gcard g3 reveal" data-delay="3">
+          <img decoding="async" src="https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?auto=format&fit=crop&w=900&q=80" alt="Punta de anca a la brasa con papa criolla" loading="lazy" />
+          <span class="icon-plate"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1.5 3.5-1 5-1 7 0 1.2.8 2 2 2s2-1 1.5-3c2 1.5 3.5 4 3.5 6.5A6 6 0 1 1 6 14.5"/></svg></span>
+          <figcaption class="overlay"><h3>Punta de anca</h3><span class="gcat">Nuestra estrella</span></figcaption>
+        </figure>
+
+        <figure class="gcard g4 reveal" data-delay="1">
+          <img decoding="async" src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80" alt="Empanadas vallunas doradas y crujientes" loading="lazy" />
+          <span class="icon-plate"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1.5 3.5-1 5-1 7 0 1.2.8 2 2 2s2-1 1.5-3c2 1.5 3.5 4 3.5 6.5A6 6 0 1 1 6 14.5"/></svg></span>
+          <figcaption class="overlay"><h3>Empanadas vallunas</h3><span class="gcat">Entradas</span></figcaption>
+        </figure>
+
+        <figure class="gcard g5 reveal" data-delay="2">
+          <img decoding="async" src="https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=900&q=80" alt="Jugo natural de mango con limón, bien frío" loading="lazy" />
+          <span class="icon-plate"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h14l-1.5 9.5A4 4 0 0 1 13.6 16h-3.2a4 4 0 0 1-3.9-3.5L5 3Z"/></svg></span>
+          <figcaption class="overlay"><h3>Jugo natural</h3><span class="gcat">Bebidas</span></figcaption>
+        </figure>
+
+        <figure class="gcard g6 reveal" data-delay="3">
+          <img decoding="async" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=80" alt="Postre de la casa: brownie tibio con helado y caramelo" loading="lazy" />
+          <span class="icon-plate"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M5 7l7-5 7 5M5 7v8a7 7 0 0 0 14 0V7"/></svg></span>
+          <figcaption class="overlay"><h3>Postre de la casa</h3><span class="gcat">Dulce final</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TESTIMONIOS / PRUEBA SOCIAL
+  ============================================================ -->
+  <section class="section reviews" id="resenas" aria-labelledby="reviews-title">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow reveal">Lo que dicen</span>
+        <h2 class="section-title reveal" data-delay="1" id="reviews-title">Comensales que <span class="accent">repiten</span></h2>
+        <div class="reviews-rating reveal" data-delay="2">
+          <span class="stars" role="img" aria-label="Calificación promedio 4.9 de 5 estrellas">
+            <svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg>
+          </span>
+          <span class="score">4.9</span>
+          <span class="count">sobre 5 · más de 240 reseñas de comensales</span>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+        <figure class="review reveal" data-delay="1">
+          <span class="stars" role="img" aria-label="5 de 5 estrellas">
+            <svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg>
+          </span>
+          <blockquote>La mejor punta de anca que he comido en Cali. Se siente el sabor a leña de verdad y la atención te hace sentir en casa.</blockquote>
+          <figcaption class="review-author">
+            <span class="review-avatar" aria-hidden="true">A</span>
+            <span><span class="who">Andrés Gómez</span><br><span class="ctx">Cliente frecuente</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="review reveal" data-delay="2">
+          <span class="stars" role="img" aria-label="5 de 5 estrellas">
+            <svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg>
+          </span>
+          <blockquote>Ambiente familiar, porciones generosas y todo recién hecho a la parrilla. Venimos cada quincena y nunca falla.</blockquote>
+          <figcaption class="review-author">
+            <span class="review-avatar" aria-hidden="true">D</span>
+            <span><span class="who">Daniela Ramírez</span><br><span class="ctx">Plan en familia</span></span>
+          </figcaption>
+        </figure>
+
+        <figure class="review reveal" data-delay="3">
+          <span class="stars" role="img" aria-label="5 de 5 estrellas">
+            <svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg><svg class="star"><use href="#ico-star"/></svg>
+          </span>
+          <blockquote>Pedí a domicilio y llegó caliente y completo. El sancocho de gallina sabe igual que el de mi abuela. Recomendadísimo.</blockquote>
+          <figcaption class="review-author">
+            <span class="review-avatar" aria-hidden="true">C</span>
+            <span><span class="who">Carlos Moreno</span><br><span class="ctx">Pedido a domicilio</span></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       UBICACIÓN Y HORARIOS
+  ============================================================ -->
+  <section class="section location" id="ubicacion">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow reveal">Visítanos</span>
+        <h2 class="section-title reveal" data-delay="1">Te esperamos <span class="accent">con la brasa lista</span></h2>
+      </div>
+
+      <div class="location-grid">
+        <div class="info-stack">
+          <div class="info-card reveal" data-delay="1">
+            <span class="ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div>
+              <h3>Dirección</h3>
+              <p>Av. Roosevelt #38-42, Barrio San Fernando<br>Cali, Valle del Cauca</p>
+              <a class="maplink" href="https://maps.google.com/?q=San+Fernando+Cali" target="_blank" rel="noopener">
+                Cómo llegar
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="info-card reveal" data-delay="2">
+            <span class="ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <div style="width:100%">
+              <h3>Horarios de atención</h3>
+              <div class="hours-list">
+                <div class="hours-row"><span class="day">Lunes</span><span class="time">Cerrado</span></div>
+                <div class="hours-row"><span class="day">Martes a Jueves</span><span class="time">12:00 — 22:00</span></div>
+                <div class="hours-row"><span class="day">Viernes y Sábado</span><span class="time">12:00 — 23:30</span></div>
+                <div class="hours-row today"><span class="day">Domingo (hoy)</span><span class="time">12:00 — 21:00</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card reveal" data-delay="3">
+            <span class="ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></span>
+            <div>
+              <h3>Reservas y domicilios</h3>
+              <p>(+57) 300 123 4567<br>reservas@lalenaysabor.co</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-panel reveal" data-delay="2">
+          <iframe
+            class="map-embed"
+            title="Mapa de ubicación de La Leña &amp; Sabor en San Fernando, Cali"
+            src="https://www.google.com/maps/embed?pb=!1m3!2m1!1sSan+Fernando,+Cali,+Colombia!6i15!3m1!1ses!5m1!1ses"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+          <div class="map-card">
+            <h3>La Leña &amp; Sabor</h3>
+            <p>San Fernando, Cali · Parqueadero disponible · Apto para grupos</p>
+            <a class="btn btn-dark" href="https://wa.me/573001234567?text=Hola%2C%20quiero%20reservar%20una%20mesa%20en%20La%20Le%C3%B1a%20%26%20Sabor" target="_blank" rel="noopener">Reservar una mesa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA FRANJA
+  ============================================================ -->
+  <section class="section cta-strip">
+    <div class="container">
+      <h2 class="section-title reveal">¿Listo para <span class="accent">sentarte a la mesa</span>?</h2>
+      <p class="reveal" data-delay="1">Aparta tu mesa en segundos por WhatsApp. La leña ya está encendida.</p>
+      <a class="btn btn-light reveal" data-delay="2" href="https://wa.me/573001234567?text=Hola%20La%20Le%C3%B1a%20%26%20Sabor%2C%20quiero%20reservar%20una%20mesa" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>
+        Reservar por WhatsApp
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-about">
+        <a href="#inicio" class="logo" aria-label="La Leña y Sabor — Parrilla en Cali, ir al inicio">
+          <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true"><use href="#brand-emblem"/></svg>
+          <span class="logo-text">
+            <span class="logo-name">La&nbsp;Leña <span class="amp">&amp;</span> <span class="logo-sabor">Sabor</span></span>
+            <span class="logo-tagline">Parrilla · Cali</span>
+          </span>
+        </a>
+        <p>Carnes a la parrilla y cocina típica colombiana en Cali. Sabor a leña, ambiente familiar y tradición desde 2008.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M16 2a5 5 0 0 0 5 5v3a8 8 0 0 1-5-1.75V15a6 6 0 1 1-6-6c.34 0 .67.03 1 .08v3.2A3 3 0 1 0 13 15V2z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487z"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Enlaces del sitio">
+        <h4>Explora</h4>
+        <ul>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#menu">Menú</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#resenas">Reseñas</a></li>
+          <li><a href="#ubicacion">Ubicación</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="tel:+573001234567">(+57) 300 123 4567</a></li>
+          <li><a href="mailto:reservas@lalenaysabor.co">reservas@lalenaysabor.co</a></li>
+          <li><a href="https://maps.google.com/?q=San+Fernando+Cali" target="_blank" rel="noopener">Av. Roosevelt #38-42, Cali</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> La Leña &amp; Sabor. Todos los derechos reservados.</span>
+      <span class="credit">Sitio demo diseñado con <a href="#inicio">cariño</a> · Cali, Colombia</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     BOTÓN FLOTANTE WHATSAPP
+============================================================ -->
+<a class="wa-float" href="https://wa.me/573001234567?text=Hola%20La%20Le%C3%B1a%20%26%20Sabor%2C%20quiero%20reservar%20una%20mesa" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>
+  <span class="wa-label">Reservar mesa</span>
+</a>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+(function () {
+  "use strict";
+
+  /* ---- 1. Navbar: cambia de estilo al hacer scroll ---- */
+  var navbar = document.getElementById("navbar");
+  var onScroll = function () {
+    if (window.scrollY > 40) navbar.classList.add("scrolled");
+    else navbar.classList.remove("scrolled");
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  /* ---- 2. Menú móvil (hamburguesa) ---- */
+  var toggle = document.getElementById("navToggle");
+  var links = document.getElementById("navLinks");
+  var setMenu = function (open) {
+    document.body.classList.toggle("nav-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+  };
+  toggle.addEventListener("click", function () {
+    setMenu(!document.body.classList.contains("nav-open"));
+  });
+  /* Cerrar al pulsar un enlace */
+  links.addEventListener("click", function (e) {
+    if (e.target.closest("a")) setMenu(false);
+  });
+  /* Cerrar con Escape */
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") setMenu(false);
+  });
+
+  /* ---- 3. Scroll reveal (animaciones de entrada) ---- */
+  var reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add("in"); });
+  }
+
+  /* ---- 4. Año dinámico en el footer ---- */
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+
+</body>
+</html>
